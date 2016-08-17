@@ -1,7 +1,7 @@
 (function(app) {
     'use strict';
 
-    var forgetPasswordCtrl = function($scope, $http) {
+    var forgetPasswordCtrl = function() {
 
     };
 

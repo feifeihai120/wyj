@@ -1,7 +1,5 @@
 'use strict';
 
-var common = require('../../common.js');
-
 var handler = module.exports = {};
 
 /*handler.onGet = function(req, res) {
@@ -12,8 +10,8 @@ handler.onPut = function(req, res, data) {
 
   //console.info(data.phone);
   res.setHeader('Content-Type', 'application/json');
-  if(data.phone == "123"){
-  	if(data.password == "123"){
+  if(data.phone === '123'){
+  	if(data.password === '123'){
   		res.write(JSON.stringify({ status: 'success' }));
   	}else{
   		res.write(JSON.stringify({ status: 'fail' }));

@@ -1,7 +1,7 @@
 (function(app) {
     'use strict';
 
-    var registCtrl = function($scope, $http) {
+    var registCtrl = function() {
 
     };
 
