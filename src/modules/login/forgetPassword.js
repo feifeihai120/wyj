@@ -4,12 +4,12 @@
     var forgetPasswordCtrl = function($scope,$state) {
 
         $scope.input = {
-            phone: ""
+            phone: ''
         };
 
         $scope.getCode = function(){
             $state.go('forgetPasswordSetting');
-        }
+        };
     };
 
     var mainRouter = function($stateProvider) {

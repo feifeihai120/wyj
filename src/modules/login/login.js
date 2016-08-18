@@ -3,11 +3,10 @@
 
     var loginCtrl = function($scope, $http,$state) {
         $scope.input = {
-            phone: "",
-            password:""
+            phone: '',
+            password:''
         };
         $scope.login = function(){
-            console.log($scope.input.phone+""+$scope.input.password);
             var phoneAndPwd = {
                 /*phone:document.getElementById('login-phone').value,
                 password:document.getElementById('login-password').value*/

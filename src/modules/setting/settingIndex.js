@@ -8,7 +8,7 @@
     };
       $scope.quit = function(){
           $state.go('login');
-      }
+      };
   };
 
   var mainRouter = function($stateProvider) {
