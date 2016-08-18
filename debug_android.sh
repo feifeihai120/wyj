@@ -1,1 +1,0 @@
-grunt --force ; rm -rf www/* ; cp -rf bower_components www/ ; cp -rf src/* www/ ; cp -rf .tmp/* www/ ; cp -rf src/assets/fonts www/styles/ && cat src/index.html |sed 's/="\//="/g' >www/index.html ;ionic prepare android ;ionic emulate android ;echo 'ok'
