@@ -1,12 +1,17 @@
 (function(app) {
   'use strict';
 
-  var changePasswordCtrl = function($scope,$state,$http) {
+  var changePasswordCtrl = function($scope,$state,$http,$ionicHistory) {
       $scope.input = {
           nowPwd: '',
           newPwd: '',
           renewPwd:''
       };
+
+      $scope.back = function(){
+          $ionicHistory.goBack();
+      };
+
       $scope.change = function () {
           if($scope.input.newPwd === $scope.input.renewPwd){
               var threePwd = {
