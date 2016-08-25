@@ -6,7 +6,7 @@ var handler = module.exports = {};
   common.jsonRes(req, res, '/all');
 };*/
 
-handler.onPut = function(req, res, data) {
+handler.onPost = function(req, res, data) {
 
   //console.info(data.phone);
   res.setHeader('Content-Type', 'application/json');

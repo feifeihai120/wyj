@@ -15,7 +15,7 @@
             var phone = {
                 phone:$scope.input.phone.toString()
             };
-            $http.put('/login/regist', phone).success(function(data) {
+            $http.post('/login/regist', phone).success(function(data) {
                 if (angular.isUndefined(data.errMsg)) {
                     if(data.status === 'success'){
                         $state.go('registSetting',{phone:$scope.input.phone});

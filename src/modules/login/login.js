@@ -17,7 +17,7 @@
                 phone:$scope.input.phone.toString(),
                 password:$scope.input.password
             };
-            $http.put('/login/login', phoneAndPwd).success(function(data) {
+            $http.post('/login/login', phoneAndPwd).success(function(data) {
                 if (angular.isUndefined(data.errMsg)) {
                     if(data.status === 'success'){
                         $state.go('tab.main');

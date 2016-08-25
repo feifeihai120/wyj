@@ -29,12 +29,9 @@
                 };
                 $http.put('/login/forgetPasswordSetting', password).success(function(data) {
                     if (angular.isUndefined(data.errMsg)) {
-                        /*if(data.status === 'success'){
-                             $state.go('login',{phone:$scope.input
-                             .phone});
-                        }else{
-                            alert('身份证号不存在！');
-                        }*/
+                        $state.go('tab.personal');
+                    }else{
+                        console.log('error:'+errorMsg);
                     }
                 });
             }

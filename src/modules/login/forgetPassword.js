@@ -15,7 +15,7 @@
             var phone = {
                 phone:$scope.input.phone.toString()
             };
-            $http.put('/login/forgetPassword', phone).success(function(data) {
+            $http.post('/login/forgetPassword', phone).success(function(data) {
                 if (angular.isUndefined(data.errMsg)) {
                     if(data.status === 'success'){
                         $state.go('forgetPasswordSetting',{phone:$scope.input

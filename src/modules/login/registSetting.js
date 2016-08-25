@@ -24,11 +24,10 @@
             var idCard = {
                 idCard:$scope.input.idCard.toString()
             };
-            $http.put('/login/registSetting', idCard).success(function(data) {
+            $http.post('/login/registSetting', idCard).success(function(data) {
                 if (angular.isUndefined(data.errMsg)) {
                     if(data.status === 'success'){
-                       /* $state.go('login',{phone:$scope.input
-                            .phone});*/
+                        $state.go('tab.main');
                     }else{
                         alert('身份证号不存在！');
                     }
