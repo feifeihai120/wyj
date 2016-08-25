@@ -31,7 +31,7 @@
                     if (angular.isUndefined(data.errMsg)) {
                         $state.go('tab.personal');
                     }else{
-                        console.log('error:'+errorMsg);
+                        console.log('error');
                     }
                 });
             }

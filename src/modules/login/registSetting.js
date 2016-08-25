@@ -2,7 +2,7 @@
     'use strict';
 
 
-    var registSettingCtrl = function($scope,$ionicHistory,$stateParams,$http) {
+    var registSettingCtrl = function($scope,$ionicHistory,$stateParams,$http,$state) {
         $scope.isResend = false;
         $scope.input = {
             name:'',
