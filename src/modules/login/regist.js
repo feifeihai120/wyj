@@ -1,6 +1,6 @@
 (function(app) {
     'use strict';
-    
+
     var registCtrl = function($scope,$state,$ionicHistory,$http) {
 
        $scope.input = {
