@@ -8,12 +8,11 @@
         };
 
         $scope.back = function(){
-            $ionicHistory.goBack();
+            //$ionicHistory.goBack();
+            $state.go('tab.personal');
         };
         $scope.login = function(){
             var phoneAndPwd = {
-                /*phone:document.getElementById('login-phone').value,
-                password:document.getElementById('login-password').value*/
                 phone:$scope.input.phone.toString(),
                 password:$scope.input.password
             };
