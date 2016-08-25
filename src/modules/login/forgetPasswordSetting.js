@@ -1,11 +1,8 @@
 (function(app) {
     'use strict';
 
-<<<<<<< HEAD
+
     var forgetPasswordSettingCtrl = function($scope,$stateParams,$state,$ionicHistory,$http) {
-=======
-    var forgetPasswordSettingCtrl = function($scope,$ionicHistory) {
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
 
         $scope.input = {
             code:'',
@@ -14,15 +11,15 @@
         //是否重新发送的标志位
         $scope.isResend = false;
 
-<<<<<<< HEAD
+
         $scope.phone = $stateParams.phone.toString().substring(0,3)+'****'+$stateParams.phone.toString().substring(7,11);
-=======
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
+
+
         $scope.back = function(){
             $ionicHistory.goBack();
         };
 
-<<<<<<< HEAD
+
         $scope.changePassword = function () {
             if($scope.input.password.length<6){
                 alert('密码长度过短请重新设置');
@@ -43,8 +40,6 @@
             }
         };
 
-=======
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
         $scope.time = {
             second:5
         };

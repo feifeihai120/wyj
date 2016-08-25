@@ -1,11 +1,7 @@
 (function(app) {
     'use strict';
-
-<<<<<<< HEAD
+    
     var forgetPasswordCtrl = function($scope,$state,$ionicHistory,$http) {
-=======
-    var forgetPasswordCtrl = function($scope,$state,$ionicHistory) {
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
 
         $scope.input = {
             phone: ''

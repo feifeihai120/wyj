@@ -1,8 +1,8 @@
 (function(app) {
-   // 'use strict';
+    'use strict';
 
-<<<<<<< HEAD
-    var registSettingCtrl = function($scope,$ionicHistory,$stateParams,$http,$state) {
+
+    var registSettingCtrl = function($scope,$ionicHistory,$stateParams,$http) {
         $scope.isResend = false;
         $scope.input = {
             name:'',
@@ -11,16 +11,15 @@
             idCard:''
         };
         $scope.phone = $stateParams.phone.toString().substring(0,3)+'****'+$stateParams.phone.toString().substring(7,11);
-=======
-    var registSettingCtrl = function($scope,$ionicHistory) {
+
+
         $scope.isResend = false;
 
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
         $scope.back = function(){
             $ionicHistory.goBack();
         };
 
-<<<<<<< HEAD
+
         $scope.regist = function(){
             var idCard = {
                 idCard:$scope.input.idCard.toString()
@@ -37,8 +36,6 @@
             });
         };
 
-=======
->>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
         $scope.time = {
             second:5
         };
