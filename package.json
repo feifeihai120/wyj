@@ -5,6 +5,7 @@
   "description": "Ionic Shengjing app",
   "dependencies": {},
   "devDependencies": {
+    "bower-nexus3-resolver": "1.0.1",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-autoprefixer": "^2.0.0",
@@ -44,16 +45,12 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-splashscreen",
-    {
-      "locator": "https://github.com/propersoft-cn/cordova-qdc-alipay.git",
-      "id": "com.qdc.plugins.alipay"
-    },
-    {
-      "locator": "https://github.com/mrwutong/cordova-qdc-wxpay.git",
-      "id": "com.qdc.plugins.wxpay"
-    },
+    "cordova-plugin-proper-qdc-alipay",
+    "cordova-plugin-proper-qdc-wxpay",
     "cordova-plugin-proper-kvstore",
-    "cordova-plugin-x-toast"
+    "cordova-plugin-x-toast",
+    "cordova-plugin-proper-properpush",
+    "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
     "android",

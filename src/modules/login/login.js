@@ -8,8 +8,12 @@
         };
 
         $scope.back = function(){
+<<<<<<< HEAD
             //$ionicHistory.goBack();
             $state.go('tab.personal');
+=======
+            $ionicHistory.goBack();
+>>>>>>> 3174530b73f82ae83e8158f573e54c8055800c66
         };
         $scope.login = function(){
             var phoneAndPwd = {
