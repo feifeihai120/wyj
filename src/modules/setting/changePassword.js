@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var changePasswordCtrl = function($scope,$state,$http,$ionicHistory) {
+  var changePasswordCtrl = function($scope,$state,$http,$ionicHistory,$cordovaToast) {
       $scope.input = {
           nowPwd: '',
           newPwd: '',
