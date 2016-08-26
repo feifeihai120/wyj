@@ -15,19 +15,16 @@
       $scope.change = function () {
           if($scope.input.newPwd === $scope.input.renewPwd){
               var threePwd = {
+                  category:'1',
                   nowPwd: $scope.input.nowPwd,
                   newPwd: $scope.input.newPwd,
                   renewPwd:$scope.input.renewPwd
               };
-              $http.put('/setting/changePassword', threePwd).success(function(data) {
-                  if (angular.isUndefined(data.errMsg)) {
-                     /* if(data.status === 'success'){
-
-                      }else{
-
-                      }*/
-                      $state.go('settingIndex');
-                  }
+              $http.put('/permission/account', threePwd).success(function(data) {
+                  $state.go('tab.personal');
+                  console.log(data);
+              }).error(function(data){
+                  $cordovaToast.showShortBottom(data);
               });
           }else{
               alert('两次密码输入不一致！');
