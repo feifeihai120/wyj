@@ -116,7 +116,7 @@
                       text: '不同意',
                       type: 'positive',
                       onTap: function(e) {
-
+                          e.preventDefault();
                           myPopup.close();
                           $ionicHistory.goBack();
 
