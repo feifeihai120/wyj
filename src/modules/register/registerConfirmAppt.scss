@@ -45,16 +45,37 @@
     }
   }
 
-  .agreement {
-    border-bottom: 1px solid #dddddd;
-    padding: 5px 0;
-    position: relative;
-    color: #999999;
 
-    i {
-      position: absolute;
-      right: 5px;
-      top: 5px;
+
+  .visits {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: -0px;
+
+    .agreement {
+      //border-bottom: 1px solid #dddddd;
+      padding:  5px !important;
+      //border: none !important;
+      position: relative;
+      color: #999999;
+
+      i {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+      }
+    }
+
+    .item-checkbox {
+     // border: 0;
+      border-bottom: 5px;
+      border-right: none;
+      border-left: none;
+      padding-right: 15px;
+      padding-left: 30px;
+      padding-top: 5px;
+      display: inline-block;
     }
   }
 

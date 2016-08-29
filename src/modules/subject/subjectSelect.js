@@ -1,11 +1,22 @@
 (function(app) {
   'use strict';
 
-  var subjectSelectCtrl = function($scope, $http, $state, $stateParams, $timeout, $cordovaToast) {
+  var subjectSelectCtrl = function($scope, $http, $state, $stateParams, $timeout, $cordovaToast,$ionicPopup,$ionicHistory) {
     $scope.hideSearch = true;
     $scope.type = $stateParams.type;
     $scope.districtId = '';
     $scope.subjectId = '';
+
+      //取得挂号须知
+      $http.get('/register/agreement').success(function(data) {
+          $scope.agreement = data;
+
+              $scope.showAgreement();
+
+      }).error(function(data){
+          console.log('fail to show');
+          $cordovaToast.showShortBottom(data);
+      });
 
     //取得学科列表
     var getSubjects = function() {
@@ -87,6 +98,34 @@
       }
     };
 
+
+      $scope.showAgreement = function() {
+          var myPopup = $ionicPopup.show({
+              template: '<div style="padding: 3px;font-size:15px">'+$scope.agreement+'</div>',
+              title: '挂号须知',
+              cssClass: 'agreement-popup',
+              buttons: [
+                  {
+                      text: '同意',
+                      type: 'positive',
+                      onTap: function(e) {
+                          e.preventDefault();
+                          myPopup.close();
+                      }
+                  },{
+                      text: '不同意',
+                      type: 'positive',
+                      onTap: function(e) {
+
+                          myPopup.close();
+                          $ionicHistory.goBack();
+
+                      }
+                  }
+              ]
+          });
+      };
+
     //右侧一级科室选择事件
     $scope.subjectRightClk = function(id) {
       if ($stateParams.type === '1') {
@@ -101,6 +140,7 @@
   var mainRouter = function($stateProvider) {
     $stateProvider.state('subjectSelect', {
       url: '/subject/subjectSelect/:type',
+        cache:false,
       templateUrl: 'modules/subject/subjectSelect.html',
       controller: subjectSelectCtrl
     });
