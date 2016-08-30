@@ -54,9 +54,7 @@
     margin-left: -0px;
 
     .agreement {
-      //border-bottom: 1px solid #dddddd;
       padding:  5px !important;
-      //border: none !important;
       position: relative;
       color: #999999;
 
@@ -68,13 +66,10 @@
     }
 
     .item-checkbox {
-     // border: 0;
       border-bottom: 5px;
       border-right: none;
       border-left: none;
-      padding-right: 15px;
-      padding-left: 30px;
-      padding-top: 5px;
+      padding: 5px 15px 0 30px;
       display: inline-block;
     }
   }

@@ -7,16 +7,23 @@
     $scope.districtId = '';
     $scope.subjectId = '';
 
-      //取得挂号须知
-      $http.get('/register/agreement').success(function(data) {
-          $scope.agreement = data;
 
-              $scope.showAgreement();
 
-      }).error(function(data){
-          console.log('fail to show');
-          $cordovaToast.showShortBottom(data);
-      });
+    $scope.$on('$ionicView.beforeEnter', function(){
+        //取得挂号须知
+        $http.get('/register/agreement').success(function(data) {
+            $scope.agreement = data;
+            $scope.showAgreement();
+        }).error(function(data){
+            $cordovaToast.showShortBottom(data);
+        });
+    });
+
+    $scope.$on('$ionicView.beforeLeave', function(){
+          if (myPopup !== null) {
+              myPopup.close();
+          }
+    });
 
     //取得学科列表
     var getSubjects = function() {
@@ -98,9 +105,9 @@
       }
     };
 
-
+      var myPopup = null;
       $scope.showAgreement = function() {
-          var myPopup = $ionicPopup.show({
+          myPopup = $ionicPopup.show({
               template: '<div style="padding: 3px;font-size:15px">'+$scope.agreement+'</div>',
               title: '挂号须知',
               cssClass: 'agreement-popup',
@@ -140,7 +147,6 @@
   var mainRouter = function($stateProvider) {
     $stateProvider.state('subjectSelect', {
       url: '/subject/subjectSelect/:type',
-        cache:false,
       templateUrl: 'modules/subject/subjectSelect.html',
       controller: subjectSelectCtrl
     });
