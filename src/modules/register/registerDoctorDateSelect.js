@@ -4,6 +4,11 @@
   var registerDoctorDateSelectCtrl = function($scope, $http, $state, $stateParams, $filter, $timeout, ionicDatePicker, $cordovaToast) {
     $scope.hideSearch = true;
     $scope.daySelected = '';
+    //默认顶部栏选中为按时间选择
+    $scope.districtId = '1';
+    $scope.dataPicker = {
+        isShow:true
+    };
     var displayDays = 7;
     var weekStr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
@@ -53,6 +58,17 @@
       });
     };
 
+    //医生方式选择事件
+    $scope.districtClk = function(id) {
+         $scope.districtId = id;
+        if(id === '1'){
+            $scope.dataPicker.isShow = true;
+        }else{
+            $scope.dataPicker.isShow = false;
+            $scope.daySelected = '';
+        }
+    };
+
     //设置可选择的日期
     var setSelectDay = function(date) {
       return {
@@ -71,7 +87,7 @@
           selectDays[i] = setSelectDay(date);
         }
         else {
-          if (date.getTime() > getNextDay(new Date(), 59).getTime()) {
+          if (date.getTime() > getNextDay(new Date(), 29).getTime()) {
             break;
           }
           date = getNextDay(new Date(selectDays[i-1].date), 1);
@@ -117,7 +133,7 @@
         getDoctors();
       },
       from: getNextDay(new Date(), 1),
-      to: getNextDay(new Date(), 60),
+      to: getNextDay(new Date(), 30),
       inputDate: new Date(),
       howTodayButton: false
     };

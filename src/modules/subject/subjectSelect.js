@@ -50,7 +50,6 @@
         data[i].name = data[i].name + '院区';
         $scope.districts.push(data[i]);
       }
-
       getSubjects();
     }).error(function(data){
       $cordovaToast.showShortBottom(data);
