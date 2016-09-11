@@ -3,7 +3,7 @@
 
   var paymentSelectCtrl = function($scope, $http, $state, $stateParams, appConstants, $cordovaToast, $ionicPopup) {
     var orderNum = $stateParams.orderNum;
-
+    console.log(orderNum);
     //倒计时
     var updateTime = function() {
       if (!angular.isUndefined($scope.time.second)) {
@@ -22,7 +22,7 @@
     };
 
     //取得挂号单信息
-    $http.get('/orders/'+orderNum).success(function(data) {
+    $http.get('orders/'+orderNum).success(function(data) {
       $scope.order = data;
       $scope.time = {
         minute: $scope.order.closeTime[0],
@@ -38,9 +38,6 @@
       $scope.subject = data.name;
       // 商品描述
       $scope.body  = data.description;
-    }).error(function(data){
-      //$cordovaToast.showShortBottom(data);
-        console.log('error is '+data);
     });
 
     // TODO 因为接口还没有实现,使用暂时的数据
