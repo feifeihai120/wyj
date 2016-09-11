@@ -3,7 +3,6 @@
 
   var paymentSelectCtrl = function($scope, $http, $state, $stateParams, appConstants, $cordovaToast, $ionicPopup) {
     var orderNum = $stateParams.orderNum;
-    console.log(orderNum);
     //倒计时
     var updateTime = function() {
       if (!angular.isUndefined($scope.time.second)) {
@@ -22,7 +21,7 @@
     };
 
     //取得挂号单信息
-    $http.get('orders/'+orderNum).success(function(data) {
+    $http.get('/orders/'+orderNum).success(function(data) {
       $scope.order = data;
       $scope.time = {
         minute: $scope.order.closeTime[0],

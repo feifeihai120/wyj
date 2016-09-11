@@ -4,7 +4,8 @@
   var subjectSelectCtrl = function($scope, $http, $state, $stateParams, $timeout, $cordovaToast,$ionicPopup,$ionicHistory) {
     $scope.hideSearch = true;
     $scope.type = $stateParams.type;
-    $scope.districtId = '';
+    //默认选中南湖院区
+    $scope.districtId = '1';
     $scope.subjectId = '';
 
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -44,7 +45,7 @@
 
     //取得院区信息
     $http.get('/organization/districts').success(function(data) {
-      $scope.districts = [{id:'', name:'全部'}];
+      $scope.districts = [];
       for (var i = 0 ; i < data.length ; i++) {
         data[i].name = data[i].name + '院区';
         $scope.districts.push(data[i]);
