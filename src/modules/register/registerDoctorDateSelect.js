@@ -6,9 +6,11 @@
     $scope.daySelected = '';
     //默认顶部栏选中为按时间选择
     $scope.districtId = '1';
+    //是否隐藏时间栏
     $scope.dataPicker = {
         isShow:true
     };
+
     var displayDays = 7;
     var weekStr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
@@ -65,7 +67,7 @@
             $scope.dataPicker.isShow = true;
         }else{
             $scope.dataPicker.isShow = false;
-            $scope.daySelected = '';
+            $scope.daySelected = $filter('date')(getNextDay(new Date(), 1), 'yyyy-MM-dd');
         }
     };
 
@@ -113,16 +115,16 @@
       getDoctors();
     });
 
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+        //默认选中明天
+        $scope.daySelected = $filter('date')(getNextDay(new Date(), 1), 'yyyy-MM-dd');
+    });
+
     //日期选择事件
     $scope.dayClk = function(index, date) {
-      if ($scope.daySelected === date) {
-        $scope.daySelected = '';
-        getDoctors();
-      }
-      else {
         $scope.daySelected = date;
         getDoctors();
-      }
     };
 
     //日期插件选择

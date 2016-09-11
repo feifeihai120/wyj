@@ -7,18 +7,17 @@
     $scope.districtId = '';
     $scope.subjectId = '';
 
-
-
     $scope.$on('$ionicView.beforeEnter', function(){
-        //取得挂号须知
-        $http.get('/register/agreement').success(function(data) {
-            $scope.agreement = data;
-            $scope.showAgreement();
-        }).error(function(data){
-            $cordovaToast.showShortBottom(data);
-        });
+        if($stateParams.type === '1' || $stateParams.type === '2'){
+            //取得挂号须知
+            $http.get('/register/agreement').success(function(data) {
+                $scope.agreement = data;
+                $scope.showAgreement();
+            }).error(function(data){
+                $cordovaToast.showShortBottom(data);
+            });
+        }
     });
-
     $scope.$on('$ionicView.beforeLeave', function(){
           if (myPopup !== null) {
               myPopup.close();
@@ -70,9 +69,11 @@
       if (!angular.isUndefined($scope.major) && $scope.major !== '') {
         if ($stateParams.type === '1') {
           $state.go('registerTodayDoctorList', {districtId: $scope.districtId, major: $scope.major});
+          $stateParams.type = '0';
         }
         else if ($stateParams.type === '2') {
           $state.go('registerDoctorDateSelect', {districtId: $scope.districtId, major: $scope.major});
+          $stateParams.type = '0';
         }
       }
     };
@@ -113,14 +114,13 @@
               buttons: [
                   {
                       text: '同意',
-                      type: 'positive',
+                      type: 'button-positive',
                       onTap: function(e) {
                           e.preventDefault();
                           myPopup.close();
                       }
                   },{
                       text: '不同意',
-                      type: 'positive',
                       onTap: function(e) {
                           e.preventDefault();
                           myPopup.close();
@@ -136,9 +136,11 @@
     $scope.subjectRightClk = function(id) {
       if ($stateParams.type === '1') {
         $state.go('registerTodayDoctorList', {districtId: $scope.districtId, subjectId: id});
+        $stateParams.type = '0';
       }
       else if ($stateParams.type === '2') {
         $state.go('registerDoctorDateSelect', {districtId: $scope.districtId, subjectId: id});
+        $stateParams.type = '0';
       }
     };
   };

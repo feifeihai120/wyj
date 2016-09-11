@@ -39,7 +39,8 @@
       // 商品描述
       $scope.body  = data.description;
     }).error(function(data){
-      $cordovaToast.showShortBottom(data);
+      //$cordovaToast.showShortBottom(data);
+        console.log('error is '+data);
     });
 
     // TODO 因为接口还没有实现,使用暂时的数据

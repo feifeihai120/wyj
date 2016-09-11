@@ -14,26 +14,17 @@
   width: 100%;
   padding-bottom: 8px;
   border-bottom: 1px solid #dddddd;
+  overflow: auto;
   .month {
     padding: 5px 0 0 7px;
   }
 
-  .day-selected {
-    border-radius: 50%;
-    background-color: #d0eaeb;
-    height: 22px;
-    width: 22px;
-    display: inline-block;
-    text-align: center;
-  }
-
   table {
     width: 100%;
-
+    table-layout: fixed;
     td {
       text-align: center;
       vertical-align: middle !important;
-
       i {
         font-size: 18px;
       }

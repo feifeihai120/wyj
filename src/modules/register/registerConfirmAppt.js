@@ -22,8 +22,8 @@
     };
     getPatient();
 
-      //若选中则代表同意规则
-      $scope.isChecked = true;
+    //若选中则代表同意规则
+    $scope.isChecked = true;
 
     //取得关系类别
     $http.get('/dataBase/familyMenberTypes').success(function(data) {
