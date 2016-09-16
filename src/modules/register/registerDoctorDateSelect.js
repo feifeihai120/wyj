@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var registerDoctorDateSelectCtrl = function($scope, $http, $state, $stateParams, $filter, $timeout, ionicDatePicker, $cordovaToast) {
+  var registerDoctorDateSelectCtrl = function($scope, $http, $state, $stateParams, $filter, $timeout, ionicDatePicker, $cordovaToast,$ionicScrollDelegate) {
     $scope.hideSearch = true;
     $scope.daySelected = '';
     //默认顶部栏选中为按时间选择
@@ -10,6 +10,26 @@
     $scope.dataPicker = {
         isShow:true
     };
+
+    $scope.rightSlide = function () {
+        $ionicScrollDelegate.scrollBy(357, 0, true);
+    };
+    $scope.leftSlide = function () {
+        $ionicScrollDelegate.scrollBy(-357, 0, true);
+    };
+
+    $scope.someVar = true;
+    $scope.scroll = function () {
+
+    };
+    if($ionicScrollDelegate.getScrollPosition()!==undefined){
+          if($ionicScrollDelegate.getScrollPosition().left>0){
+              $scope.someVar = true;
+          }else{
+              $scope.someVar = false;
+          }
+    }
+
     //不同的院区的颜色
     $scope.districtColor = new Map();
     //颜色数组
@@ -17,7 +37,7 @@
         'district-icon-royal','district-icon-calm','district-icon-assertive'];
     //院区数量
     var districtCount = 0;
-    var displayDays = 7;
+    var displayDays = 30;
     var weekStr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
     //取得指定天数以后的日期
@@ -35,6 +55,10 @@
         $cordovaToast.showShortBottom(data);
       });
     };
+
+    /*$scope.doRefresh = function(){
+
+    };*/
 
     //取得科室下的医生
     $scope.major = $stateParams.major;
