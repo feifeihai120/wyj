@@ -27,8 +27,10 @@
             } else {
                 $scope.leftIconIsShow = false;
             }
-
+            $scope.$apply($scope.leftIconIsShow);
+            scrollMonth();
         };
+
 
         //不同的院区的颜色
         $scope.districtColor = new Map();
@@ -60,7 +62,7 @@
                 $cordovaToast.showShortBottom(data);
             });
         };
-        
+
 
         //取得科室下的医生
         $scope.major = $stateParams.major;
@@ -86,6 +88,7 @@
                 $scope.doctors = data;
                 var id;
                 for (var i = 0; i < data.length; i++) {
+                    $scope.doctors[i].district = $scope.doctors[i].district.substring(0,2);
                     id = data[i].districtId;
                     if (i > 0) {
                         if (data[i].districtId !== data[i - 1].districtId) {
@@ -164,10 +167,39 @@
             $scope.daySelected = $filter('date')(getNextDay(new Date(), 1), 'yyyy-MM-dd');
         });
 
+        //当前滑动应该显示的月份
+        var currentMonth = $scope.selectDays[0].month;
+        var currentDay = $scope.selectDays[0].day;
+        var allDays;
+        var remainDays;
+        var remainDaysWidth;
+        var scrollMonth = function () {
+            if(currentMonth === 1 || currentMonth === 3 || currentMonth === 5 || currentMonth === 7
+                || currentMonth === 8 || currentMonth === 10 || currentMonth === 12){
+                allDays = 31;
+                remainDays = allDays - currentDay;
+            }else if(currentDay === 2){
+                allDays = 28;
+                remainDays = allDays - currentDay;
+            }else{
+                allDays = 30;
+                remainDays = allDays - currentDay;
+            }
+            remainDaysWidth = remainDays*51;
+            if ($ionicScrollDelegate.getScrollPosition().left > remainDaysWidth) {
+                if($scope.selectDays[0].month === currentMonth){
+                    $scope.selectDays[0].month = currentMonth+1;
+                }
+            } else {
+                $scope.selectDays[0].month = currentMonth;
+            }
+        };
+
 
         //日期选择事件
         $scope.dayClk = function (index, date) {
             $scope.daySelected = date;
+            $scope.selectDays[0].month = parseInt(date.substring(5,7));
             getDoctors();
         };
 

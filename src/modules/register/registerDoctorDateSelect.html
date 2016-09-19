@@ -47,6 +47,7 @@
       <i class="icon ion-ios-arrow-right positive" style="width: 5%;margin-left: 8px"
          ng-style="{'visibility': rightIconIsShow ? 'visible' : 'hidden'}" ng-click="rightSlide()"></i>
   </div>
+
   <ion-content ng-class="{false: 'registerDoctorSelect-content'}[dataPicker.isShow]"
                class="has-header content-fill registerDoctorDateSelect-content">
     <ul ng-if="doctors.length > 0" class="list">
@@ -68,4 +69,5 @@
     </ul>
     <div ng-if="doctors.length == 0" class="no-content-center">暂无医生排班信息</div>
   </ion-content>
+
 </ion-view>
