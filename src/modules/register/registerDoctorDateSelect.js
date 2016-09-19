@@ -27,7 +27,13 @@
             } else {
                 $scope.leftIconIsShow = false;
             }
+            if($ionicScrollDelegate.getScrollPosition().left >= 1120){
+                $scope.rightIconIsShow = false;
+            }else{
+                $scope.rightIconIsShow = true;
+            }
             $scope.$apply($scope.leftIconIsShow);
+            $scope.$apply($scope.rightIconIsShow);
             scrollMonth();
         };
 
