@@ -180,8 +180,7 @@
         var remainDays;
         var remainDaysWidth;
         var scrollMonth = function () {
-            if(currentMonth === 1 || currentMonth === 3 || currentMonth === 5 || currentMonth === 7
-                || currentMonth === 8 || currentMonth === 10 || currentMonth === 12){
+            if(currentMonth === 1 || currentMonth === 3 || currentMonth === 5 || currentMonth === 7 || currentMonth === 8 || currentMonth === 10 || currentMonth === 12){
                 allDays = 31;
                 remainDays = allDays - currentDay;
             }else if(currentDay === 2){
