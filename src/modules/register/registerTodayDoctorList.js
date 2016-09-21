@@ -8,8 +8,13 @@
     var getDoctorPhoto = function(doctorId, index) {
       $http.get('/doctors/photo', {params: {doctorId: doctorId, index: index}}).success(function(data, status, headers, config) {
         $scope.doctors[config.params.index].photo = data;
-      }).error(function(data){
-        $cordovaToast.showShortBottom(data);
+      }).error(function(data, status, fun, config){
+        if (status === 404) {
+          $scope.doctors[config.params.index].photo = '';
+        }
+        else {
+          $cordovaToast.showShortBottom(data);
+        }
       });
     };
 
@@ -64,7 +69,17 @@
       if (overCount > 0) {
         var isLogin = userService.hasToken();
         if (isLogin) {
-          $state.go('registerConfirmToday', {doctorId: doctorId});
+          $http.get('/user/tokenVal').success(function() {
+            $state.go('registerConfirmToday', {doctorId: doctorId});
+          }).error(function(data, status){
+            if (status !== 401) {
+              $cordovaToast.showShortBottom(data);
+            }
+            else {
+              userService.clearToken();
+              $state.go('login');
+            }
+          });
         }
         else {
           $state.go('login');

@@ -87,6 +87,11 @@
         return response || $q.when(response);
       },
       responseError: function(rejection) {
+        if (rejection.status === 404) {
+          if (angular.isUndefined(rejection.data) || rejection.data === '') {
+            rejection.data = '数据未找到！';
+          }
+        }
         requestIndex = 0;
         $rootScope.inProcess = false;
         $rootScope.refreshProcess = 0;

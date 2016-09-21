@@ -4,14 +4,25 @@
   var doctorIntroductionViewCtrl = function($scope, $http, $state, $stateParams, $cordovaToast, userService) {
     $scope.type = ($stateParams.type==='1');
     var isLogin = userService.hasToken();
+    $http.get('/user/tokenVal').error(function(data, status){
+      if (status === 401) {
+        userService.clearToken();
+        isLogin = false;
+      }
+    });
 
     //取得医生简介
     $http.get('/doctors/'+$stateParams.doctorId).success(function(data) {
       $scope.introduction = data;
       $http.get('/doctors/photo', {params: {doctorId: $stateParams.doctorId}}).success(function(data) {
         $scope.introduction.photo = data;
-      }).error(function(data){
-        $cordovaToast.showShortBottom(data);
+      }).error(function(data, status){
+        if (status === 404) {
+          $scope.introduction.photo = '';
+        }
+        else {
+          $cordovaToast.showShortBottom(data);
+        }
       });
     }).error(function(data){
       $cordovaToast.showShortBottom(data);
