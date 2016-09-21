@@ -144,7 +144,7 @@
         $cordovaToast.showShortBottom(data);
       });
     }
-      var width = document.getElementById("date-scroll").offsetWidth;
+      var width = document.getElementById('date-scroll').offsetWidth;
       var scrollRightWidth ;
 
 
