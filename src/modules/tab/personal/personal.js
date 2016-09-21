@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var tabPersonalCtrl = function($scope, $http, $state, userService,$ionicHistory) {
+  var tabPersonalCtrl = function($scope, $http, $state,$cordovaToast, userService,$ionicHistory) {
     $scope.$on('$ionicView.beforeEnter', function(){
       //取得用户信息
       $scope.isLogin = true;
