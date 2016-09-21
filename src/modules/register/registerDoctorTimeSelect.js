@@ -37,13 +37,8 @@
       $scope.doctor = data;
       $http.get('/doctors/photo', {params: {doctorId: $scope.doctor.id}}).success(function(data) {
         $scope.photo = data;
-      }).error(function(data, status){
-        if (status === 404) {
-          $scope.photo = '';
-        }
-        else {
-          $cordovaToast.showShortBottom(data);
-        }
+      }).error(function(){
+        $scope.photo = '';
       });
     }).error(function(data){
       $cordovaToast.showShortBottom(data);
@@ -206,7 +201,12 @@
         var isLogin = userService.hasToken();
         if (isLogin) {
           $http.get('/user/tokenVal').success(function() {
-            $state.go('registerConfirmAppt', {doctorId: $stateParams.doctorId, date: $scope.daySelected+' '+time});
+            if ($stateParams.type === '1') {
+              $state.go('registerConfirmToday', {doctorId: $stateParams.doctorId, date: $scope.daySelected+' '+time});
+            }
+            else {
+              $state.go('registerConfirmAppt', {doctorId: $stateParams.doctorId, date: $scope.daySelected+' '+time});
+            }
           }).error(function(data, status){
             if (status !== 401) {
               $cordovaToast.showShortBottom(data);
@@ -226,7 +226,7 @@
 
   var mainRouter = function($stateProvider) {
     $stateProvider.state('registerDoctorTimeSelect', {
-      url: '/register/registerDoctorTimeSelect/:doctorId/:date',
+      url: '/register/registerDoctorTimeSelect/:doctorId/:date/:type',
       templateUrl: 'modules/register/registerDoctorTimeSelect.html',
       controller: registerDoctorTimeSelectCtrl
     });
