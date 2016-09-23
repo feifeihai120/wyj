@@ -27,7 +27,8 @@
             } else {
                 $scope.leftIconIsShow = false;
             }
-            if($ionicScrollDelegate.getScrollPosition().left >= 1120){
+
+            if($ionicScrollDelegate.getScrollPosition().left >= scrollRightWidth){
                 $scope.rightIconIsShow = false;
             }else{
                 $scope.rightIconIsShow = true;
@@ -216,6 +217,8 @@
         var allDays;
         var remainDays;
         var remainDaysWidth;
+        var offsetWidth = document.getElementById('date-scroll').offsetWidth;
+        var scrollRightWidth = 30 *51 - offsetWidth;
         var scrollMonth = function () {
             if(currentMonth === 1 || currentMonth === 3 || currentMonth === 5 || currentMonth === 7 || currentMonth === 8 || currentMonth === 10 || currentMonth === 12){
                 allDays = 31;

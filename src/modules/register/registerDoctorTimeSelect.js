@@ -7,6 +7,8 @@
     $scope.selectDays = [];
     $scope.allDays = [];
     var dayPicker1 = {};
+    var width = document.getElementById('date-scroll').offsetWidth;
+    var scrollRightWidth;
     $scope.leftIconIsShow = false;
     $scope.rightIconIsShow = false;
     //取得指定天数以后的日期
@@ -124,6 +126,7 @@
             });
         }
     });
+
     //设置可选择的日期
     var setSelectDay = function(date, data) {
       return {
@@ -152,10 +155,6 @@
     $scope.dataSelected = {};
     var dateTmp = null;
 
-    var width = document.getElementById('date-scroll').offsetWidth;
-    var scrollRightWidth ;
-
-
       $scope.rightSlide = function () {
           $ionicScrollDelegate.scrollBy(357, 0, true);
       };
@@ -170,10 +169,10 @@
           } else {
               $scope.leftIconIsShow = false;
           }
-          if($ionicScrollDelegate.getScrollPosition().left > scrollRightWidth){
+          if($ionicScrollDelegate.getScrollPosition().left >= scrollRightWidth-1){
               $scope.rightIconIsShow = false;
           }else{
-              if($scope.dataSelected.length>7){
+              if($scope.allDays.length>7){
                   $scope.rightIconIsShow = true;
               }
           }
