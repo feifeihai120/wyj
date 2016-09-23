@@ -12,10 +12,12 @@
           $scope.user.phone = $scope.user.phone.substring(0,3)+'****'+$scope.user.phone.substring(7,11);
         }
       }).error(function(data, status){
+        $scope.user = {};
         if (status !== 401) {
           $cordovaToast.showShortBottom(data);
         }
         else {
+          userService.clearToken();
           $scope.isLogin = false;
         }
       });
@@ -24,6 +26,7 @@
       $http.get('/user/familyMembers/count').success(function(data) {
         $scope.memberCount = data;
       }).error(function(data){
+        $scope.memberCount = '';
         if (status !== 401) {
           $cordovaToast.showShortBottom(data);
         }
@@ -33,11 +36,13 @@
       $http.get('/user/collectionDoctors/count').success(function(data) {
         $scope.doctorCount = data;
       }).error(function(data){
+        $scope.doctorCount = '';
         if (status !== 401) {
           $cordovaToast.showShortBottom(data);
         }
       });
-        $ionicHistory.clearHistory();
+
+      $ionicHistory.clearHistory();
     });
 
     //路由跳转
