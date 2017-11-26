@@ -9,18 +9,14 @@
       $http.get('/doctors/photo', {params: {doctorId: doctorId, index: index}}).success(function(data, status, headers, config) {
         $scope.introductions[config.params.index].photo = data;
       }).error(function(data, status, fun, config){
-        if (status === 404) {
-          $scope.introductions[config.params.index].photo = '';
-        }
-        else {
-          $cordovaToast.showShortBottom(data);
-        }
+        $scope.introductions[config.params.index].photo = '';
       });
     };
 
     //取得医生介绍列表
     var getDoctorIntroductions = function(param, isInit) {
       $http.get('/doctors', {params: param}).success(function(data) {
+        $scope.spinnerShow = false;
         if (data.length === 0) {
           $scope.vm.moreData = false;
         }
@@ -39,6 +35,8 @@
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
       }).error(function(data){
+        $scope.spinnerShow = false;
+        $scope.introductions = [];
         $cordovaToast.showShortBottom(data);
       });
     };
@@ -64,6 +62,8 @@
       moreData: true,
       pageNo: 1,
       init: function () {
+        $scope.spinnerShow = true;
+        $scope.introductions = null;
         $scope.vm.pageNo = 1;
         getDoctorIntroductions({searchName: $scope.searchName, pageNo: $scope.vm.pageNo}, true);
       },

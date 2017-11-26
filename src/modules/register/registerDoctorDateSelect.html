@@ -1,73 +1,53 @@
 <ion-view>
-  <isj-spinner is-show="$root.inProcess" is-refresh="$root.refreshProcess"></isj-spinner>
-  <ion-header-bar class="bar-light registerDoctorDateSelect-title">
-    <isj-back-button></isj-back-button>
-    <div class="title"></div>
-    <a class="button button-clear icon ion-ios-search-strong positive" ng-click="searchClk()"></a>
-  </ion-header-bar>
+    <isj-spinner is-show="spinnerShow"></isj-spinner>
+    <ion-header-bar class="bar-light registerDoctorDateSelect-title">
+        <isj-back-button></isj-back-button>
+        <div class="title"></div>
+        <a class="button button-clear icon ion-ios-search-strong positive" ng-click="searchClk()"></a>
+    </ion-header-bar>
 
-  <ion-header-bar ng-class="{true: 'search-none'}[hideSearch]" class="head-search">
-    <form ng-submit="doSearch()">
-      <input id="registerDoctorDateSelect_search" type="search" ng-model="major" placeholder="专业/专长">
-    </form>
-    <div class="search-icon">
-        <a class="button button-clear icon ion-ios-close-empty positive" ng-click="searchClk()"></a>
-    </div>
-  </ion-header-bar>
+    <ion-header-bar ng-class="{true: 'search-none'}[hideSearch]" class="head-search">
+        <form ng-submit="doSearch()">
+            <input id="registerDoctorDateSelect_search" type="search" ng-model="major" placeholder="专业/专长">
+        </form>
+        <div class="search-icon">
+            <a class="button button-clear icon ion-ios-close-empty positive" ng-click="searchClk()"></a>
+        </div>
+    </ion-header-bar>
 
-  <div class="district-select has-header" ng-show="!hasSearchStr">
+    <div class="district-select has-header" ng-show="!hasSearchStr">
         <div class="button-bar">
-            <button ng-class="{false: 'button-outline'}[districtId == '1']" class="button button-positive district-button"
-                    ng-click="districtClk('1')">
+            <button ng-class="{false: 'button-outline'}[appointmentMode == '1']" class="button button-positive district-button" ng-click="appointmentModeClk('1')">
                 预约时间
             </button>
-            <button ng-class="{false: 'button-outline'}[districtId == '2']" class="button button-positive district-button"
-                    ng-click="districtClk('2')">
+            <button ng-class="{false: 'button-outline'}[appointmentMode == '2']" class="button button-positive district-button" ng-click="appointmentModeClk('2')">
                 预约医生
             </button>
         </div>
-  </div>
+    </div>
 
-  <div class="registerDoctorDateSelect-date has-header-district has-header" ng-show="dataPicker.isShow && !hasSearchStr">
-        <div class="positive month">{{selectDays[0].month}}月</div>
-      <i class="icon ion-ios-arrow-left positive" style="width: 7%;margin-left: 5px"
-         ng-style="{'visibility': leftIconIsShow ? 'visible' : 'hidden'}" ng-click="leftSlide()"></i>
-      <ion-scroll has-bouncing="false" id="date-scroll" class="date-scroll" direction="x" scrollbar-y="false" on-scroll="scroll()">
-              <table>
-                  <tr>
-                      <td ng-repeat="oneDay in selectDays" class="week" width="51px" ng-click="dayClk($index, '{{oneDay.date}}')">{{oneDay.week}}</td>
-                  </tr>
-                  <tr>
-                      <td ng-repeat="oneDay in selectDays" class="day" ng-click="dayClk($index, '{{oneDay.date}}')">
-                          <div class="day-select" ng-class="{true: 'positive day-selected'}[oneDay.date==daySelected]">{{oneDay.day}}</div>
-                      </td>
-                  </tr>
-              </table>
-      </ion-scroll>
-      <i class="icon ion-ios-arrow-right positive" style="width: 5%;margin-left: 8px"
-         ng-style="{'visibility': rightIconIsShow ? 'visible' : 'hidden'}" ng-click="rightSlide()"></i>
-  </div>
+    <isj-date-select date-select-param="dateSelectParam" callback="dateSelectFun()" class="has-header-district has-header registerDoctorDateSelect-date" ng-show="appointmentMode == '1' && !hasSearchStr"></isj-date-select>
 
-  <ion-content class="has-header content-fill registerDoctorDateSelect-content" ng-class="contentMarginTop()">
-    <ul ng-if="doctors.length > 0" class="list">
-      <li ng-repeat="doctor in doctors" class="item item-avatar-left" ng-click="doctorClk(doctor.id, doctor.overCount)">
-        <img ng-if="(doctor.photo == null || doctor.photo == '') && doctor.sexCode == '1'" src="./assets/images/doctor_man.png" onerror="this.src='./assets/images/doctor_man.png'" class="photo" ng-click="photoClk(doctor.id, $event)">
-        <img ng-if="(doctor.photo == null || doctor.photo == '') && doctor.sexCode == '0'" src="./assets/images/doctor_woman.png" onerror="this.src='./assets/images/doctor_man.png'" class="photo" ng-click="photoClk(doctor.id, $event)">
-        <img ng-if="doctor.photo != null && doctor.photo != ''" ng-src="{{doctor.photo}}" class="photo" ng-click="photoClk(doctor.id, $event)">
-        <div class="name">
-          <h2>{{doctor.name}}</h2>
-          <p>{{doctor.title}}</p>
-          <div ng-if="doctor.overCount > 0" class="positive-bg can-register">有号</div>
-          <div ng-if="doctor.overCount == 0" class="dark-bg can-register">无号</div>
-        </div>
-        <p>出诊地点：{{doctor.dept}}</p>
-        <p>擅长：{{doctor.skill===''?'暂无':doctor.skill}}</p>
-          <div class="positive-border district-icon" ng-class="districtColor.get(doctor.districtId)"></div>
-        <div class="district-icon-font balanced">{{doctor.district}}</div>
-      </li>
-    </ul>
-    <div ng-if="doctors.length == 0" class="no-content-center">暂无医生排班信息</div>
-    <ion-infinite-scroll ng-if="vm.moreData" on-infinite="vm.loadMore()" distance="2%"></ion-infinite-scroll>
-  </ion-content>
+    <ion-content class="has-header content-fill registerDoctorDateSelect-content" ng-class="contentMarginTop()">
+        <ul ng-if="doctors.length > 0" class="list">
+            <li ng-repeat="doctor in doctors" class="item item-avatar-left" ng-click="doctorClk(doctor.id, doctor.overCount)">
+                <img ng-if="(doctor.photo == null || doctor.photo == '') && doctor.sexCode == '1'" src="./assets/images/doctor_man.png" onerror="this.src='./assets/images/doctor_man.png'" class="photo" ng-click="photoClk(doctor.id, $event)">
+                <img ng-if="(doctor.photo == null || doctor.photo == '') && doctor.sexCode == '0'" src="./assets/images/doctor_woman.png" onerror="this.src='./assets/images/doctor_man.png'" class="photo" ng-click="photoClk(doctor.id, $event)">
+                <img ng-if="doctor.photo != null && doctor.photo != ''" ng-src="{{doctor.photo}}" class="photo" ng-click="photoClk(doctor.id, $event)">
+                <div class="name">
+                    <h2>{{doctor.name}}</h2>
+                    <p>{{doctor.title}}</p>
+                    <div ng-if="doctor.overCount > 0" class="positive-bg can-register">有号</div>
+                    <div ng-if="doctor.overCount == 0" class="dark-bg can-register">无号</div>
+                </div>
+                <p>出诊地点：{{doctor.dept}}</p>
+                <p>擅长：{{doctor.skill===''?'暂无':doctor.skill}}</p>
+                <div class="positive-border district-icon" ng-class="districtColor[doctor.districtId]"></div>
+                <div class="district-icon-font balanced">{{doctor.district}}</div>
+            </li>
+        </ul>
+        <div ng-if="doctors.length == 0" class="no-content-center">暂无医生排班信息</div>
+        <ion-infinite-scroll ng-if="vm.moreData" on-infinite="vm.loadMore()" distance="2%"></ion-infinite-scroll>
+    </ion-content>
 
 </ion-view>

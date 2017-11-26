@@ -3,6 +3,7 @@ $balancedColor: #33cd5f;
 $royalColor: #886aea;
 $calmColor:#38D1EA;
 $assertive:#EA3B2E;
+
 /* ion-header-bar common css */
 ion-header-bar {
   .icon-return {
@@ -146,8 +147,8 @@ a {
     width: 48px;
 
     a.button.button-clear.icon:before {
-      margin-left: 16px;
-      font-size: 26px;
+      margin-left: 20px;
+      font-size: 28px;
     }
   }
 }
